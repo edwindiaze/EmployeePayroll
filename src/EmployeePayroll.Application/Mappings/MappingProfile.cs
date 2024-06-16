@@ -13,7 +13,7 @@ public class MappingProfile : Profile
     {
         CreateMap<Employee, EmployeeDto>()
             .ForMember(dest => dest.FullName, opt => opt.MapFrom(src => src.FullName.Value))
-            .ForMember(dest => dest.Salary, opt => opt.MapFrom(src => src.CalculateSalary()));
+            .ForMember(dest => dest.Salary, opt => opt.MapFrom(src => src.GetBaseSalary()));
 
         CreateMap<CreateEmployeeCommand, Employee>();
         

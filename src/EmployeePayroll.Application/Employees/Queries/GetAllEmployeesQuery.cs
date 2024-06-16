@@ -3,6 +3,6 @@ using MediatR;
 
 namespace EmployeePayroll.Application.Employees.Queries;
 
-public class GetEmployeesQuery : IRequest<IEnumerable<EmployeeDto>>
+public class GetAllEmployeesQuery : IRequest<IEnumerable<EmployeeDto>>
 {
 }

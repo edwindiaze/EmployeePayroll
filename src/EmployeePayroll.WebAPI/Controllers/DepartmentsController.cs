@@ -7,14 +7,12 @@ namespace EmployeePayroll.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class DepartmentsController : ControllerBase
+    public class DepartmentsController(IMediator mediator) : ControllerBase
     {
-        private readonly IMediator _mediator;
-
-        public DepartmentsController(IMediator mediator) => _mediator = mediator;
+        private readonly IMediator _mediator = mediator;
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetDepartment(Guid id)
+        public async Task<IActionResult> GetById(Guid id)
         {
             var query = new GetDepartmentQuery { Id = id };
             var result = await _mediator.Send(query);
@@ -22,7 +20,7 @@ namespace EmployeePayroll.WebAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetDepartments()
+        public async Task<IActionResult> GetAll()
         {
             var query = new GetDepartmentsQuery();
             var result = await _mediator.Send(query);
@@ -30,14 +28,14 @@ namespace EmployeePayroll.WebAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateDepartment(CreateDepartmentCommand command)
+        public async Task<IActionResult> Create(CreateDepartmentCommand command)
         {
             var id = await _mediator.Send(command);
-            return CreatedAtAction(nameof(GetDepartment), new { id }, id);
+            return CreatedAtAction(nameof(GetById), new { id }, id);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateDepartment(Guid id, UpdateDepartmentCommand command)
+        public async Task<IActionResult> Update(Guid id, UpdateDepartmentCommand command)
         {
             if (id != command.Id)
             {
@@ -49,7 +47,7 @@ namespace EmployeePayroll.WebAPI.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteDepartment(Guid id)
+        public async Task<IActionResult> Delete(Guid id)
         {
             var command = new DeleteDepartmentCommand { Id = id };
             await _mediator.Send(command);

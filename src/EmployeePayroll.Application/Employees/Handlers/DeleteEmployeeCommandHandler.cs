@@ -10,6 +10,6 @@ public class DeleteEmployeeCommandHandler(IEmployeeService service) : IRequestHa
 
     public async Task Handle(DeleteEmployeeCommand request, CancellationToken cancellationToken)
     {
-        await _service.DeleteEmployeeAsync(request.Id);
+        await _service.DeleteAsync(request.Id);
     }
 }

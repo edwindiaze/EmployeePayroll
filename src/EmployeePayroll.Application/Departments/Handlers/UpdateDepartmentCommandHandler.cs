@@ -14,6 +14,6 @@ public class UpdateDepartmentCommandHandler(IDepartmentService service, IMapper 
     public async Task Handle(UpdateDepartmentCommand request, CancellationToken cancellationToken)
     {
         var department = _mapper.Map<Department>(request);
-        await _service.UpdateDepartmentAsync(department);
+        await _service.UpdateAsync(department);
     }
 }

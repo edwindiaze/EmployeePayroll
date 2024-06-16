@@ -14,6 +14,6 @@ public class UpdateEmployeeCommandHandler(IEmployeeService service, IMapper mapp
     public async Task Handle(UpdateEmployeeCommand request, CancellationToken cancellationToken)
     {
         var employee = _mapper.Map<Employee>(request);
-        await _service.UpdateEmployeeAsync(employee);
+        await _service.UpdateAsync(employee);
     }
 }

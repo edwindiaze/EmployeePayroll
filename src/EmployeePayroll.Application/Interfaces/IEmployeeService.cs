@@ -5,12 +5,12 @@ namespace EmployeePayroll.Application.Interfaces;
 
 public interface IEmployeeService
 {
-    Task<Employee> GetEmployeeByIdAsync(Guid id);
-    Task<IEnumerable<Employee>> GetAllEmployeesAsync();
-    Task<EmployeeDto> GetEmployeeByEmailAsync(string email);
-    Task<Guid> CreateEmployeeAsync(Employee employee);
-    Task UpdateEmployeeAsync(Employee employee);
-    Task DeleteEmployeeAsync(Guid id);
-    Task<IReadOnlyList<Employee>> SearchEmployeesByCriteriaAsync(string firstName, string lastName, int? age, int? workedHours);
-    Task DeleteEmployeeByEmailAsync(string email);
+    Task<Employee> GetByIdAsync(Guid id);
+    Task<IEnumerable<Employee>> GetAllAsync();
+    Task<EmployeeDto?> GetByEmailAsync(string email);
+    Task<Guid> CreateAsync(Employee employee);
+    Task UpdateAsync(Employee employee);
+    Task DeleteAsync(Guid id);
+    Task<IReadOnlyList<Employee>> SearchByAsync(string firstName, string lastName, int? age, int? workedHours);
+    Task DeleteByEmailAsync(string email);
 }

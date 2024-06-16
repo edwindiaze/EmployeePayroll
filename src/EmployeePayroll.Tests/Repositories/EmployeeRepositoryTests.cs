@@ -9,7 +9,7 @@ using NSubstitute;
 namespace EmployeePayroll.Tests.Repositories;
 public class EmployeeRepositoryTests
 {
-    private AppDbContext _dbContext;
+    private PayrollDbContext _dbContext;
     private EmployeeRepository _employeeRepository;
     private IConfiguration _configurationMock;
 
@@ -28,7 +28,11 @@ public class EmployeeRepositoryTests
     public async Task GetByIdAsync_ShouldReturnEmployee()
     {
         // Arrange
-        var employee = new Employee { /* properties */ };
+        var employee = new Employee {
+            FirstName = "John",
+            LastName = "Doe",
+            Email = "john.doe@example.com"
+        };
         await _dbContext.Employees.AddAsync(employee);
         await _dbContext.SaveChangesAsync();
 

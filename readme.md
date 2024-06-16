@@ -17,9 +17,12 @@ In order to store the developer information, it will be necessary to design a da
 ```
 mkdir EmployeePayroll.Domain
 cd EmployeePayroll.Domain
-
+dotnet add package FluentValidation
 dotnet new classlib
 ```
+
+For Powershell use:
+Install-Package FluentValidation
 
 ### EmployeePayroll.Application Layer
 ```
@@ -77,6 +80,7 @@ dotnet add reference ../EmployeePayroll.Domain
 dotnet add reference ../EmployeePayroll.Application
 dotnet add reference ../EmployeePayroll.Infrastructure
 dotnet add reference ../EmployeePayroll.WebAPI
+dotnet test
 ```
 
 ## Create and apply data migrations
@@ -90,6 +94,11 @@ For production, use Azure Pipelines or GitHub Actions to apply migrations during
 cd EmployeePayroll.Infrastructure
 dotnet ef migrations add InitialCreate --startup-project ../EmployeePayroll.WebAPI
 dotnet ef database update --startup-project ../EmployeePayroll.WebAPI
+```
+or
+```
+dotnet ef migrations add InitialCreate --project EmployeePayroll.Infrastructure --startup-project EmployeePayroll.WebAPI
+dotnet ef database update --project EmployeePayroll.Infrastructure --startup-project EmployeePayroll.WebAPI
 ```
 
 ### Powershell

@@ -14,7 +14,7 @@ public class GetEmployeeQueryHandler(IEmployeeService service, IMapper mapper)
 
     public async Task<EmployeeDto> Handle(GetEmployeeQuery request, CancellationToken cancellationToken)
     {
-        var employee = await _service.GetEmployeeByIdAsync(request.Id);
+        var employee = await _service.GetByIdAsync(request.Id);
         return _mapper.Map<EmployeeDto>(employee);
     }
 }

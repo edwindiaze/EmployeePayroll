@@ -14,7 +14,7 @@ public class CreateDepartmentCommandHandler(IDepartmentService service, IMapper 
     public async Task<Guid> Handle(CreateEmployeeCommand request, CancellationToken cancellationToken)
     {
         var department = _mapper.Map<Department>(request);
-        await _service.CreateDepartmentAsync(department);
+        await _service.CreateAsync(department);
         return department.Id;
     }
 }

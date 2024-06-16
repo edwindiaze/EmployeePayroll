@@ -25,14 +25,24 @@ public class EmployeeServiceTests
     {
         // Arrange
         var employeeId = Guid.NewGuid();
-        var employee = new Employee { Id = employeeId, /* other properties */ };
-        var expectedEmployeeDto = new EmployeeDto { Id = employeeId, /* other properties */ };
+        var employee = new Employee { 
+            Id = employeeId,
+            FirstName = "John",
+            LastName = "Doe",
+            Email = "john.doe@example.com"
+        };
+        var expectedEmployeeDto = new EmployeeDto { 
+            Id = employeeId,
+            FirstName = "John",
+            LastName = "Doe",
+            Email = "john.doe@example.com"
+        };
 
         _employeeRepository.GetByIdAsync(employeeId).Returns(employee);
         _mapper.Map<EmployeeDto>(employee).Returns(expectedEmployeeDto);
 
         // Act
-        var result = await _employeeService.GetEmployeeByIdAsync(employeeId);
+        var result = await _employeeService.GetByIdAsync(employeeId);
 
         // Assert
         Assert.Equal(employeeId, result.Id);

@@ -6,7 +6,7 @@ public interface IDepartmentRepository
 {
     Task<Department> GetByIdAsync(Guid id);
     Task<IReadOnlyList<Department>> GetAllAsync();
-    Task AddAsync(Department department);
+    Task Createsync(Department department);
     Task UpdateAsync(Department department);
     Task DeleteAsync(Guid id);
 }

@@ -4,6 +4,7 @@ using EmployeePayroll.Application.Employees.Queries;
 using EmployeePayroll.Application.Interfaces;
 using EmployeePayroll.Application.Mappings;
 using EmployeePayroll.Domain.Interfaces;
+using EmployeePayroll.Domain.Services;
 using EmployeePayroll.Infrastructure.Persistence.Contexts;
 using EmployeePayroll.Infrastructure.Persistence.Repositories;
 using EmployeePayroll.Infrastructure.Services;
@@ -30,11 +31,11 @@ public static class ServiceExtensions
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
         services.AddAutoMapper(typeof(MappingProfile));
 
-        services.AddDbContext<AppDbContext>(options =>
+        services.AddDbContext<PayrollDbContext>(options =>
         options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
 
         // Register command and query handlers
-        services.AddTransient<IRequestHandler<GetEmployeesQuery, IEnumerable<EmployeeDto>>, GetEmployeesQueryHandler>();
+        services.AddTransient<IRequestHandler<GetAllEmployeesQuery, IEnumerable<EmployeeDto>>, GetEmployeesQueryHandler>();
         services.AddTransient<IRequestHandler<GetEmployeeQuery, EmployeeDto>, GetEmployeeQueryHandler>();
 
         // Register other services
@@ -42,5 +43,6 @@ public static class ServiceExtensions
         services.AddScoped<IDepartmentRepository, DepartmentRepository>();
         services.AddScoped<IEmployeeService, EmployeeService>();
         services.AddScoped<IDepartmentService, DepartmentService>();
+        services.AddScoped<ISalaryCalculator, StandardSalaryCalculatorService>();
     }
 }

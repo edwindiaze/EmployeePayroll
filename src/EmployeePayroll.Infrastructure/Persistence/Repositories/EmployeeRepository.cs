@@ -1,4 +1,5 @@
-﻿using EmployeePayroll.Domain.Entities;
+﻿using EmployeePayroll.Application.Exceptions;
+using EmployeePayroll.Domain.Entities;
 using EmployeePayroll.Domain.Interfaces;
 using EmployeePayroll.Infrastructure.Persistence.Contexts;
 using Microsoft.EntityFrameworkCore;
@@ -6,13 +7,13 @@ using System.Linq.Expressions;
 
 namespace EmployeePayroll.Infrastructure.Persistence.Repositories;
 
-public class EmployeeRepository(AppDbContext dbContext) : IEmployeeRepository
+public class EmployeeRepository(PayrollDbContext dbContext) : IEmployeeRepository
 {
-    private readonly AppDbContext _dbContext = dbContext;
+    private readonly PayrollDbContext _dbContext = dbContext;
 
     public async Task<Employee> GetByIdAsync(Guid id) => await _dbContext.Employees.FindAsync(id);
 
-    public async Task<IReadOnlyList<Employee>> GetAllAsync(Expression<Func<Employee, bool>> predicate = null)
+    public async Task<IReadOnlyList<Employee>> SearchByAsync(Expression<Func<Employee, bool>>? predicate = null)
     {
         IQueryable<Employee> query = _dbContext.Employees;
 
@@ -24,7 +25,7 @@ public class EmployeeRepository(AppDbContext dbContext) : IEmployeeRepository
         return await query.ToListAsync();
     }
 
-    public async Task AddAsync(Employee employee)
+    public async Task CreateAsync(Employee employee)
     {
         await _dbContext.Employees.AddAsync(employee);
         await _dbContext.SaveChangesAsync();
@@ -44,5 +45,13 @@ public class EmployeeRepository(AppDbContext dbContext) : IEmployeeRepository
             _dbContext.Employees.Remove(employee);
             await _dbContext.SaveChangesAsync();
         }
+    }
+
+    public async Task<Employee> GetByEmailAsync(string email)
+    {
+        var employees = await SearchByAsync(e => e.Email == email);
+        var employee = employees.SingleOrDefault() 
+            ?? throw new AppException($"Employee with email '{email}' not found.");
+        return employee;
     }
 }

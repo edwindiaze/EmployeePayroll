@@ -14,7 +14,7 @@ public class GetDepartmentsQueryHandler(IDepartmentService service, IMapper mapp
 
     public async Task<IEnumerable<DepartmentDto>> Handle(GetDepartmentsQuery request, CancellationToken cancellationToken)
     {
-        var departments = await _service.GetAllDepartmentsAsync();
+        var departments = await _service.GetAllAsync();
         return _mapper.Map<IEnumerable<DepartmentDto>>(departments);
     }
 }

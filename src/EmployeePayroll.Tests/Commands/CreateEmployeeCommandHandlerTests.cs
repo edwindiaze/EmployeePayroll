@@ -37,17 +37,18 @@ public class CreateEmployeeCommandHandlerTests
         {
             Id = employeeId,
             FirstName = command.FirstName,
+            LastName = command.LastName,
             Email = command.Email,
         };
 
         _mapperMock.Map<Employee>(command).Returns(employee);
-        _employeeServiceMock.CreateEmployeeAsync(employee).Returns(Task.FromResult(employeeId));
+        _employeeServiceMock.CreateAsync(employee).Returns(Task.FromResult(employeeId));
 
         // Act
         var result = await _handler.Handle(command, CancellationToken.None);
 
         // Assert
         Assert.Equal(employeeId, result);
-        await _employeeServiceMock.Received().CreateEmployeeAsync(employee);
+        await _employeeServiceMock.Received().CreateAsync(employee);
     }
 }

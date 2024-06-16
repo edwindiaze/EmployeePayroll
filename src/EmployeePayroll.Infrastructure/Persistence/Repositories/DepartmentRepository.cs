@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EmployeePayroll.Infrastructure.Persistence.Repositories;
 
-public class DepartmentRepository(AppDbContext dbContext) : IDepartmentRepository
+public class DepartmentRepository(PayrollDbContext dbContext) : IDepartmentRepository
 {
-    private readonly AppDbContext _dbContext = dbContext;
+    private readonly PayrollDbContext _dbContext = dbContext;
 
     public async Task<Department> GetByIdAsync(Guid id) => await _dbContext.Departments.FindAsync(id);
 
@@ -16,7 +16,7 @@ public class DepartmentRepository(AppDbContext dbContext) : IDepartmentRepositor
         return await _dbContext.Departments.ToListAsync();
     }
 
-    public async Task AddAsync(Department Department)
+    public async Task Createsync(Department Department)
     {
         await _dbContext.Departments.AddAsync(Department);
         await _dbContext.SaveChangesAsync();

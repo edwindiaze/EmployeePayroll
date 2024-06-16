@@ -5,7 +5,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace EmployeePayroll.Infrastructure.Persistence.Contexts;
 
-public class AppDbContext(DbContextOptions<AppDbContext> options, IConfiguration configuration) : DbContext(options)
+public class PayrollDbContext(DbContextOptions<PayrollDbContext> options, IConfiguration configuration) : DbContext(options)
 {
     private readonly IConfiguration _configuration = configuration;
 

@@ -10,7 +10,7 @@ public class EmployeeDto
     public string? FullName { get; set; }
     public int Age { get; set; }
     public int WorkedHours { get; set; }
-    public decimal SalaryByHour { get; set; }
+    public decimal SalaryByHours { get; set; }
     public decimal Salary { get; set; }
     public EmployeeTypes EmployeeType { get; set; }
     public string? Email { get; set; }
