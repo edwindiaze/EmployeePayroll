@@ -19,7 +19,7 @@ public class EmployeeConfiguration : IEntityTypeConfiguration<Employee>
         
         builder.Property(e => e.Age).IsRequired();
         builder.Property(e => e.WorkedHours).IsRequired();
-        builder.Property(e => e.SalaryByHours).IsRequired().HasColumnType("decimal(18,2)");
+        builder.Property(e => e.SalaryByHour).IsRequired().HasColumnType("decimal(18,2)");
         builder.Property(e => e.EmployeeType).IsRequired().HasConversion(
             v => v.ToString(),
             v => (EmployeeTypes)Enum.Parse(typeof(EmployeeTypes), v)

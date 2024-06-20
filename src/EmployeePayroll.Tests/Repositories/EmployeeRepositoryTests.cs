@@ -1,27 +1,33 @@
-﻿using EmployeePayroll.Application.Interfaces;
-using EmployeePayroll.Domain.Entities;
+﻿using EmployeePayroll.Domain.Entities;
+using EmployeePayroll.Domain.Interfaces;
 using EmployeePayroll.Infrastructure.Persistence.Contexts;
 using EmployeePayroll.Infrastructure.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using NSubstitute;
 
 namespace EmployeePayroll.Tests.Repositories;
 public class EmployeeRepositoryTests
 {
-    private PayrollDbContext _dbContext;
-    private EmployeeRepository _employeeRepository;
-    private IConfiguration _configurationMock;
+    private readonly IEmployeeRepository _employeeRepository;
+    private readonly InMemoryDbContext _dbContext;
 
     public EmployeeRepositoryTests()
     {
-        //var dbContextOptions = new DbContextOptionsBuilder<AppDbContext>()
-        //    .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
-        //    .Options;
+        // Create an instance of IConfiguration (e.g., using Microsoft.Extensions.Configuration)
+        var configuration = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("appsettings.json")
+            .Build();
 
-        //_configurationMock = Substitute.For<IConfiguration>();
-        //_dbContext = new AppDbContext(dbContextOptions, _configurationMock);
-        //_employeeRepository = new EmployeeRepository(_dbContext);
+        // Create an instance of DbContextOptions<PayrollDbContext>
+        var options = new DbContextOptionsBuilder<PayrollDbContext>()
+            .UseInMemoryDatabase(databaseName: "InMemoryDatabase")
+            .Options;
+
+        _dbContext = new InMemoryDbContext(options, configuration);
+        _employeeRepository = new InMemoryEmployeeRepository(_dbContext);
+
+        // Seed data for the in-memory database (optional)
     }
 
     [Fact]
@@ -41,5 +47,19 @@ public class EmployeeRepositoryTests
 
         // Assert
         Assert.Equal(employee, result);
+    }
+
+    [Fact]
+    public async Task GetByEmailAsync_ShouldReturnEmployeeWithSpecifiedEmail()
+    {
+        // Arrange
+        string email = "john.doe@example.com";
+
+        // Act
+        var employee = await _employeeRepository.GetByEmailAsync(email);
+
+        // Assert
+        Assert.NotNull(employee);
+        Assert.Equal(email, employee.Email);
     }
 }

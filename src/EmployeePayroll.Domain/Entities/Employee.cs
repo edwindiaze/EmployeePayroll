@@ -11,7 +11,7 @@ public class Employee
     public FullName FullName => new(firstName: FirstName, lastName: LastName);
     public int Age { get; set; }
     public int WorkedHours { get; set; }
-    public decimal SalaryByHours { get; set; }
+    public decimal SalaryByHour { get; set; }
     public EmployeeTypes EmployeeType { get; set; }
     public string? Email { get; set; }
     public Guid DepartmentId { get; set; }
@@ -19,7 +19,7 @@ public class Employee
 
     public decimal GetBaseSalary()
     {
-        decimal baseSalary = WorkedHours * SalaryByHours;
+        decimal baseSalary = WorkedHours * SalaryByHour;
         return baseSalary;
     }
 }

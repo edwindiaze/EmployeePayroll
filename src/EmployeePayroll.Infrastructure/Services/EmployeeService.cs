@@ -20,7 +20,7 @@ public class EmployeeService(IEmployeeRepository repository, IMapper mapper) : I
 
     public async Task<IEnumerable<Employee>> GetAllAsync()
     {
-        return await _repository.SearchByAsync();
+        return await _repository.GetAllAsync();
     }
 
     public async Task<Guid> CreateAsync(Employee employee)
@@ -50,7 +50,7 @@ public class EmployeeService(IEmployeeRepository repository, IMapper mapper) : I
 
     public async Task<IReadOnlyList<Employee>> SearchByAsync(string? firstName, string? lastName, int? age, int? workedHours)
     {
-        var employees = await _repository.SearchByAsync(e =>
+        var employees = await _repository.GetAllAsync(e =>
             (string.IsNullOrWhiteSpace(firstName) || e.FirstName.Contains(firstName)) &&
             (string.IsNullOrWhiteSpace(lastName) || e.LastName.Contains(lastName)) &&
             (!age.HasValue || e.Age == age.Value) &&
@@ -61,7 +61,7 @@ public class EmployeeService(IEmployeeRepository repository, IMapper mapper) : I
 
     public async Task DeleteByEmailAsync(string email)
     {
-        var employees = await _repository.SearchByAsync(e => e.Email == email);
+        var employees = await _repository.GetAllAsync(e => e.Email == email);
         var employee = employees.SingleOrDefault()
             ?? throw new AppException($"Employee with email '{email}' not found.");
         await _repository.DeleteAsync(employee.Id);
@@ -69,7 +69,7 @@ public class EmployeeService(IEmployeeRepository repository, IMapper mapper) : I
 
     public async Task<EmployeeDto?> GetByEmailAsync(string email)
     {
-        var employees = await _repository.SearchByAsync(e => e.Email == email);
+        var employees = await _repository.GetAllAsync(e => e.Email == email);
         var employee = employees.SingleOrDefault();
         return employee == null ? null : _mapper.Map<EmployeeDto>(employee);
     }

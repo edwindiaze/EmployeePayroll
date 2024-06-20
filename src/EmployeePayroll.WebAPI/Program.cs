@@ -1,7 +1,5 @@
-using EmployeePayroll.Infrastructure.Persistence.Contexts;
 using EmployeePayroll.WebAPI.Extensions;
 using EmployeePayroll.WebAPI.Middleware;
-using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 

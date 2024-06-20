@@ -24,7 +24,7 @@ public class DepartmentService(IDepartmentRepository repository, IMapper mapper)
     public async Task<Guid> CreateAsync(Department department)
     {
         // Perform additional validation or business logic if needed
-        await _repository.Createsync(department);
+        await _repository.CreateAsync(department);
         return department.Id;
     }
 

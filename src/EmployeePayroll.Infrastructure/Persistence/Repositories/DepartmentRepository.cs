@@ -1,40 +1,9 @@
 ﻿using EmployeePayroll.Domain.Entities;
 using EmployeePayroll.Domain.Interfaces;
 using EmployeePayroll.Infrastructure.Persistence.Contexts;
-using Microsoft.EntityFrameworkCore;
 
 namespace EmployeePayroll.Infrastructure.Persistence.Repositories;
 
-public class DepartmentRepository(PayrollDbContext dbContext) : IDepartmentRepository
+public class DepartmentRepository(PayrollDbContext dbContext) : BaseRepository<Department>(dbContext), IDepartmentRepository
 {
-    private readonly PayrollDbContext _dbContext = dbContext;
-
-    public async Task<Department> GetByIdAsync(Guid id) => await _dbContext.Departments.FindAsync(id);
-
-    public async Task<IReadOnlyList<Department>> GetAllAsync()
-    {
-        return await _dbContext.Departments.ToListAsync();
-    }
-
-    public async Task Createsync(Department Department)
-    {
-        await _dbContext.Departments.AddAsync(Department);
-        await _dbContext.SaveChangesAsync();
-    }
-
-    public async Task UpdateAsync(Department Department)
-    {
-        _dbContext.Departments.Update(Department);
-        await _dbContext.SaveChangesAsync();
-    }
-
-    public async Task DeleteAsync(Guid id)
-    {
-        var Department = await _dbContext.Departments.FindAsync(id);
-        if (Department != null)
-        {
-            _dbContext.Departments.Remove(Department);
-            await _dbContext.SaveChangesAsync();
-        }
-    }
 }

@@ -18,11 +18,13 @@ In order to store the developer information, it will be necessary to design a da
 mkdir EmployeePayroll.Domain
 cd EmployeePayroll.Domain
 dotnet add package FluentValidation
+dotnet add package CSharpFunctionalExtensions
 dotnet new classlib
 ```
 
 For Powershell use:
 Install-Package FluentValidation
+
 
 ### EmployeePayroll.Application Layer
 ```
@@ -51,6 +53,7 @@ dotnet add package MediatR
 dotnet add package Microsoft.Extensions.Configuration.Binder
 dotnet add package Microsoft.Extensions.DependencyInjection
 dotnet add package Microsoft.EntityFrameworkCore.Tools
+dotnet add package Microsoft.EntityFrameworkCore.InMemory
 
 dotnet add reference ../EmployeePayroll.Application
 ```

@@ -30,7 +30,7 @@ public static class ValidationExtensions
             return Result.Failure("Worked hours must be between 30 and 50.");
         }
 
-        if (employee.SalaryByHours < 13)
+        if (employee.SalaryByHour < 13)
         {
             return Result.Failure("Salary by hour must be greater than 13.");
         }

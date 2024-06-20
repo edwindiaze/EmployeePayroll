@@ -27,7 +27,7 @@ public class GetEmployeeSalaryQueryHandler : IRequestHandler<GetEmployeeSalaryQu
             FullName = fullName,
             EmployeeType = employee.EmployeeType,
             WorkedHours = employee.WorkedHours,
-            HourlyRate = employee.SalaryByHours,
+            HourlyRate = employee.SalaryByHour,
             TotalSalary = totalSalary
         };
     }

@@ -1,5 +1,6 @@
 ﻿using EmployeePayroll.Domain.Entities;
 using EmployeePayroll.Infrastructure.Persistence.Configurations;
+using EmployeePayroll.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -16,7 +17,7 @@ public class PayrollDbContext(DbContextOptions<PayrollDbContext> options, IConfi
     {
         if (!optionsBuilder.IsConfigured)
         {
-            optionsBuilder.UseNpgsql(_configuration.GetConnectionString("DefaultConnection"));
+            optionsBuilder.UseNpgsql(ConfigService.GetConnectionString(_configuration));
         }
     }
 

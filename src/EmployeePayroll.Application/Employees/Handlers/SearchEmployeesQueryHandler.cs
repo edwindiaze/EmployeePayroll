@@ -9,9 +9,9 @@ public class SearchEmployeesQueryHandler : IRequestHandler<SearchEmployeesQuery,
 {
     private readonly IEmployeeService _service;
 
-    public SearchEmployeesQueryHandler(IEmployeeService repository)
+    public SearchEmployeesQueryHandler(IEmployeeService service)
     {
-        _service = repository;
+        _service = service;
     }
 
     public async Task<IEnumerable<Employee>> Handle(SearchEmployeesQuery request, CancellationToken cancellationToken)

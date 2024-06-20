@@ -12,18 +12,18 @@ public class EmployeeTests
     [InlineData(50, 0, 0)]
     public void GetBaseSalary_ShouldCalculateCorrectly(int hours, decimal rate, decimal expected)
     {
-        // Arrange
+        // Given
         var employee = new Employee {
-            FirstName = "Juan",
-            LastName = "Valdez",
+            FirstName = "John",
+            LastName = "Doe",
             WorkedHours = hours, 
-            SalaryByHours = rate 
+            SalaryByHour = rate 
         };
 
-        // Act
+        // When
         var result = employee.GetBaseSalary();
 
-        // Assert
+        // Then
         result.Should().Be(expected);
     }
 }

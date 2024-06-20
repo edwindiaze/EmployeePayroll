@@ -15,7 +15,8 @@
       "launchBrowser": true,
       "launchUrl": "swagger",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "DATABASE_CONNECTION_STRING": "Host=pg-1a1b3f6c-estehiguy843-orderapi.g.aivencloud.com;Database=defaultdb;Username=avnadmin;Password=AVNS_1tbHlLdZjt-A6EUnTRc;SSL Mode=Require;Trust Server Certificate=true;port=21084"
       },
       "dotnetRunMessages": true,
       "applicationUrl": "https://localhost:7231;http://localhost:5110"

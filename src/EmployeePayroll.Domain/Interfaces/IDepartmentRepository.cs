@@ -2,11 +2,6 @@
 
 namespace EmployeePayroll.Domain.Interfaces;
 
-public interface IDepartmentRepository
+public interface IDepartmentRepository: IRepository<Department>
 {
-    Task<Department> GetByIdAsync(Guid id);
-    Task<IReadOnlyList<Department>> GetAllAsync();
-    Task Createsync(Department department);
-    Task UpdateAsync(Department department);
-    Task DeleteAsync(Guid id);
 }

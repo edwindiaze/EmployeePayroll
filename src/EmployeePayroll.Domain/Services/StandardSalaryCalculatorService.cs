@@ -12,9 +12,9 @@ public class StandardSalaryCalculatorService : ISalaryCalculator
         var multiplier = employee.EmployeeType switch
         {
             EmployeeTypes.Associate => 1.0m,
-            EmployeeTypes.Technical => 1.1m,
-            EmployeeTypes.Senior => 1.2m,
-            EmployeeTypes.Lead => 1.3m,
+            EmployeeTypes.Technical => 1.12m,
+            EmployeeTypes.Senior => 1.25m,
+            EmployeeTypes.Lead => 1.5m,
             _ => throw new ArgumentOutOfRangeException()
         };
         return baseSalary * multiplier;

@@ -31,7 +31,7 @@ public class GetEmployeeSalaryQueryHandlerTests
             Email = email,
             EmployeeType = EmployeeTypes.Senior,
             WorkedHours = 40,
-            SalaryByHours = 25
+            SalaryByHour = 25
         };
 
         _repository.GetByEmailAsync(email).Returns(employee);
@@ -82,7 +82,7 @@ public class GetEmployeeSalaryQueryHandlerTests
             LastName = "Doe",
             EmployeeType = EmployeeTypes.Lead,
             WorkedHours = 45,
-            SalaryByHours = 30m
+            SalaryByHour = 30m
         };
 
         _repository.GetByEmailAsync(email).Returns(info);
@@ -106,7 +106,7 @@ public class GetEmployeeSalaryQueryHandlerTests
         _calculator.Received(1).CalculateTotalSalary(Arg.Is<Employee>(e =>
             e.EmployeeType == EmployeeTypes.Lead &&
             e.WorkedHours == 45 &&
-            e.SalaryByHours == 30m
+            e.SalaryByHour == 30m
         ));
     }
 }

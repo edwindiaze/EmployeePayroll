@@ -32,7 +32,7 @@ public static class ServiceExtensions
         services.AddAutoMapper(typeof(MappingProfile));
 
         services.AddDbContext<PayrollDbContext>(options =>
-        options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
+        options.UseNpgsql(ConfigService.GetConnectionString(configuration)));
 
         // Register command and query handlers
         services.AddTransient<IRequestHandler<GetAllEmployeesQuery, IEnumerable<EmployeeDto>>, GetEmployeesQueryHandler>();
